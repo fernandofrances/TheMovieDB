@@ -16,38 +16,55 @@ struct ShowCardView: View {
     
     var body: some View {
         ZStack {
-            AsyncImage(url: configuration.image(with: show.posterPath ?? "", size: .w300)) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: width, height: height)
-                    .clipped()
-            } placeholder: {
-                ProgressView()
-            }
-            
-            LinearGradient(
-                gradient: Gradient(
-                    stops: [.init(color: .black, location: 0),
-                            .init(color: .clear, location: 1)]
-                ),
-                startPoint: .bottomLeading,
-                endPoint: .topLeading
-            )
-                .opacity(0.9)
-            
-            VStack {
+            imageLayer
+            gradientLayer
+            textLayer
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 25.0))
+        .frame(width: width, height: height)
+        .northWestShadow()
+    }
+    
+    private var imageLayer: some View {
+        AsyncImage(url: configuration.image(with: show.posterPath ?? "", size: .w300)) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .clipped()
+        } placeholder: {
+            ProgressView()
+        }
+    }
+    
+    private var gradientLayer: some View {
+        LinearGradient(
+            gradient: Gradient(
+                stops: [.init(color: .black, location: 0),
+                        .init(color: .black, location: 0.3),
+                        .init(color: .clear, location: 1)]
+            ),
+            startPoint: .bottomLeading,
+            endPoint: .topLeading
+        )
+            .opacity(0.85)
+    }
+    
+    private var textLayer: some View {
+        HStack {
+            VStack(alignment: .leading) {
                 Spacer()
                 Text(Genre.name(forIdentifier: show.genreIdentifiers?.first ?? 0) ?? "")
                     .font(.system(size: 12))
                     .foregroundColor(.element)
                     .bold()
-            }.padding(10)
-            
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 25.0))
-        .frame(width: width, height: height)
-        .northWestShadow()
+                Text(show.title)
+                    .font(.system(size: 20))
+                    .bold()
+                    .foregroundColor(.element)
+            }
+            Spacer()
+        }.padding()
     }
     
 }

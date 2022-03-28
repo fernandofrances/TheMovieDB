@@ -59,8 +59,6 @@ struct TopRatedView: View {
 
 struct TopRatedView_Previews: PreviewProvider {
     
-    class Dummy {}
-    
     static var previews: some View {
         TopRatedView()
             .environmentObject(AppStore(initial: AppState(topRated: TopRatedState(topRated: Loadable.success(Page.mock)), showDetail: ShowDetailState(), images: ImagesState()), reducer: appReducer))
