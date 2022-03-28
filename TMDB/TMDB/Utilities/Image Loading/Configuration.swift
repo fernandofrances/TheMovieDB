@@ -17,6 +17,12 @@ public struct Configuration: Decodable {
     }
 
     public let images: Images
+    
+    func image(with path: String, size: ImageSize) -> URL {
+        return images.baseURL
+            .appendingPathComponent(size.rawValue)
+            .appendingPathComponent(path)
+    }
 }
 
 public extension Configuration {

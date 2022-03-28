@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Page<T: Decodable>: Decodable {
+struct Page<T: Decodable>: Decodable{
     let page: Int
     let totalPages: Int
     let totalResults: Int
@@ -20,3 +20,25 @@ struct Page<T: Decodable>: Decodable {
         case results
     }
 }
+
+extension Page: Mockable {
+    static var fileName: String {
+        "Page"
+    }
+}
+
+//extension Page {
+//    
+//    private class Dummy { }
+//    
+//    static var mock: Page<T> {
+//       
+//        guard let url = Bundle(for: Dummy.self).url(forResource: "Page",
+//                                        withExtension: "json"),
+//              let data = try? Data(contentsOf: url),
+//              let page = try? JSONDecoder().decode(Page<T>.self, from: data) else {
+//                    fatalError()
+//                }
+//        return page
+//    }
+//}

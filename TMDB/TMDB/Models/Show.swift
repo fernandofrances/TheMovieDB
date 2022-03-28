@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Show: Decodable {
+struct Show: Decodable, Hashable {
     let identifier: Int64
     let title: String
     let posterPath: String?
@@ -23,4 +23,20 @@ struct Show: Decodable {
         case firstAirDate = "first_air_date"
         case genreIdentifiers = "genre_ids"
     }
+    
+    init(identifier: Int64, title: String, posterPath: String) {
+        self.identifier = identifier
+        self.title = title
+        self.posterPath = posterPath
+        self.backdropPath = nil
+        self.firstAirDate = nil
+        self.genreIdentifiers = nil
+    }
 }
+
+extension Show: Mockable {
+    static var fileName: String {
+        "Show"
+    }
+}
+

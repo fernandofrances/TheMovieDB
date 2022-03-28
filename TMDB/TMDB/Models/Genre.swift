@@ -34,10 +34,12 @@ private extension Genre {
         let bundle = Bundle(for: Dummy.self)
         let decoder = JSONDecoder()
         
-        guard let data = "genres".readLocalJSONFile(),
-              let genres = try? decoder.decode([Genre].self, from: data) else {
-                  fatalError("Couldn't load bundled genres")
-              }
+        guard
+            let url = bundle.url(forResource: "genres", withExtension: "json"),
+            let data = try? Data(contentsOf: url),
+            let genres = try? decoder.decode([Genre].self, from: data) else {
+                fatalError("Couldn't load bundled genres")
+            }
               
         var genresByIdentifier: [Int: Genre] = Dictionary(minimumCapacity: genres.count)
 

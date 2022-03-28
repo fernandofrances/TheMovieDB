@@ -28,3 +28,9 @@ struct ShowDetail: Decodable {
         case genres
     }
 }
+
+extension ShowDetail: Mockable {
+    static var fileName: String {
+        "ShowDetail"
+    }
+}
