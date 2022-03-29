@@ -44,16 +44,16 @@ struct ShowDetailHeaderView: View {
                         VStack(alignment: .leading) {
                             Text(show.genres.first?.name ?? "")
                                 .font(.system(size: 12))
-                                .foregroundColor(.element)
+                                .foregroundColor(.white)
                                 .bold()
                             Text(show.name)
                                 .font(.system(size: 30))
                                 .bold()
-                                .foregroundColor(.element)
+                                .foregroundColor(.white)
                         }
                         Spacer()
                         Text(String(show.vote ?? 0))
-                            .foregroundColor(Color.element)
+                            .foregroundColor(Color.white)
                             .background(
                                 Circle()
                                     .fill(Color.black)

@@ -56,7 +56,7 @@ struct ShowDetailView: View {
                     VStack {
                         Text(show.overview)
                             .font(.system(size: 20))
-                            .foregroundColor(Color.element)
+                            .foregroundColor(Color.white)
                             .multilineTextAlignment(.leading)
                             .padding()
                         
@@ -64,10 +64,10 @@ struct ShowDetailView: View {
                             VStack(alignment: .leading) {
                                 Text("\(show.episodes) episodes")
                                     .font(.system(size: 18))
-                                    .foregroundColor(Color.element)
+                                    .foregroundColor(Color.white)
                                 Text("released on \(show.releaseDate)")
                                     .font(.system(size: 18))
-                                    .foregroundColor(Color.element)
+                                    .foregroundColor(Color.white)
                             }
                             Spacer()
                         }.padding(20)
