@@ -13,19 +13,26 @@ func showDetailMiddleware(service: ShowDetailService) -> Middleware<AppState, Ap
     return { state, action in
         
         switch action {
-        case .showDetail(action: .loadDetail(identifier: let identifier)):
-            return service.loadShow(identifier: identifier)
-                .catch({ error in
-                    Just(Loadable.failure(error))
-                })
-                .map { AppAction.showDetail(action: .setDetail($0)) }
-                .eraseToAnyPublisher()
-        case .showDetail(action: .loadSimilars(let identifier, let page)):
+        case .showDetail(action: .loadShowDetailAndRelated(let identifier, let page)):
             return service.loadSimilars(identifier: identifier, page: page)
+                .map { page -> [Int64] in
+                    var addingOriginal = [identifier]
+                    addingOriginal.append(contentsOf: page.results.map { $0.identifier })
+                    return addingOriginal
+                }
+                .flatMap { identifiers in
+                    Publishers.Sequence(sequence: identifiers)
+                        .flatMap { identifier in
+                            service.loadShow(identifier: identifier)
+                        }
+                        .collect()
+                }
+                .map { loadableDetails in
+                    AppAction.showDetail(action: .setDetail(Loadable.success(loadableDetails)))
+                }
                 .catch({ error in
-                    Just(Loadable.failure(error))
+                    Just(AppAction.showDetail(action: .setDetail(Loadable.failure(error))))
                 })
-                .map { AppAction.showDetail(action: .setSimilars($0)) }
                 .eraseToAnyPublisher()
         default:
             break

@@ -24,69 +24,19 @@ class ShowDetailMiddleware_Tests: XCTestCase {
         cancelables.removeAll()
     }
     
-    func test_showDetailMiddleware_loadShowDetail_withSuccess() {
-        
-        guard let detailId = MockShowDetailRepository.showDetailFromJson()?.identifier else {
-            XCTFail("Corrupted mock data")
-            return
-        }
+    
+    func test_showDetailMiddleware_loadShowDetailAndRelated_withSuccess() {
         
         store = AppStore(initial: AppState.initial, reducer: appReducer, middlewares: [showDetailMiddleware(service: showDetailService)])
         
         XCTAssertEqual(store.state.showDetail.currentDetail, .initial)
-        store.dispatch(.showDetail(action: .loadDetail(identifier: detailId)))
+        store.dispatch(.showDetail(action: .loadShowDetailAndRelated(identifier: 1, page: 1)))
         XCTAssertEqual(store.state.showDetail.currentDetail, .progress)
-        
-        let promise = expectation(description: "Loading Show detail")
-        
-        store.$state.sink { state in
-            switch state.showDetail.currentDetail {
-            case .success(let value):
-                if value != nil {
-                    promise.fulfill()
-                }
-            default:
-                break
-            }
-        }.store(in: &cancelables)
-        
-        wait(for: [promise], timeout: 0.5)
-    }
-    
-    func test_showDetailMiddleware_loadShowDetail_withError() {
-        
-        store = AppStore(initial: AppState.initial, reducer: appReducer, middlewares: [showDetailMiddleware(service: showDetailServiceError)])
-        
-        XCTAssertEqual(store.state.showDetail.currentDetail, .initial)
-        store.dispatch(.showDetail(action: .loadDetail(identifier: 1)))
-        XCTAssertEqual(store.state.showDetail.currentDetail, .progress)
-        
-        let promise = expectation(description: "Loading Show detail with error")
-        
-        store.$state.sink { state in
-            switch state.showDetail.currentDetail {
-            case .failure(_):
-                promise.fulfill()
-            default:
-                break
-            }
-        }.store(in: &cancelables)
-        
-        wait(for: [promise], timeout: 0.5)
-    }
-    
-    func test_showDetailMiddleware_loadSimilars_withSuccess() {
-        
-        store = AppStore(initial: AppState.initial, reducer: appReducer, middlewares: [showDetailMiddleware(service: showDetailService)])
-        
-        XCTAssertEqual(store.state.showDetail.currentSimilars, .initial)
-        store.dispatch(.showDetail(action: .loadSimilars(identifier: 1, page: 1)))
-        XCTAssertEqual(store.state.showDetail.currentSimilars, .progress)
         
         let promise = expectation(description: "Loading Similars")
         
         store.$state.sink { state in
-            switch state.showDetail.currentSimilars {
+            switch state.showDetail.currentDetail{
             case .success(let value):
                 if value != nil {
                     promise.fulfill()
@@ -103,14 +53,14 @@ class ShowDetailMiddleware_Tests: XCTestCase {
         
         store = AppStore(initial: AppState.initial, reducer: appReducer, middlewares: [showDetailMiddleware(service: showDetailServiceError)])
         
-        XCTAssertEqual(store.state.showDetail.currentSimilars, .initial)
-        store.dispatch(.showDetail(action: .loadSimilars(identifier: 1, page: 1)))
-        XCTAssertEqual(store.state.showDetail.currentSimilars, .progress)
+        XCTAssertEqual(store.state.showDetail.currentDetail, .initial)
+        store.dispatch(.showDetail(action: .loadShowDetailAndRelated(identifier: 1, page: 1)))
+        XCTAssertEqual(store.state.showDetail.currentDetail, .progress)
         
         let promise = expectation(description: "Loading Similars with error")
         
         store.$state.sink { state in
-            switch state.showDetail.currentSimilars{
+            switch state.showDetail.currentDetail{
             case .failure(_):
                 promise.fulfill()
             default:

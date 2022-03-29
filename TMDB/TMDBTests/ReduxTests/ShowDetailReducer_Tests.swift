@@ -17,37 +17,23 @@ class ShowDetailReducer_Tests: XCTestCase {
 
     override func tearDown() {}
     
-    func test_showDetailReducer_loadShowDetail_WithSuccess() {
+    func test_showDetailReducer_loadShowDetailAndRelated_WithSuccess() {
         
-        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: .progress, currentSimilars: .initial), images: ImagesState())
-        appReducer(state: &state, action: .showDetail(action: .loadDetail(identifier: 1)))
+        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: .progress), images: ImagesState())
+        
+        appReducer(state: &state, action: .showDetail(action: .loadShowDetailAndRelated(identifier: 1, page: 1)))
         XCTAssertEqual(state.showDetail.currentDetail, expectedState.showDetail.currentDetail)
     }
 
-    func test_showDetailReducer_setShowDetail_withSuccess() {
+    func test_showDetailReducer_setShowDetailAndRelated_withSuccess() {
         
-        let successLoadable = Loadable<ShowDetail>.success(nil)
+        let successLoadable = Loadable<[ShowDetail]>.success(nil)
         
-        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: successLoadable, currentSimilars: .initial), images: ImagesState())
+        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: successLoadable), images: ImagesState())
         appReducer(state: &state, action: .showDetail(action: .setDetail(successLoadable)))
         XCTAssertEqual(state.showDetail.currentDetail, expectedState.showDetail.currentDetail)
     }
     
-    func test_showDetailReducer_loadSimilars_WithSuccess() {
-        
-        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: .initial, currentSimilars: .progress), images: ImagesState())
-        appReducer(state: &state, action: .showDetail(action: .loadSimilars(identifier: 1, page: 1)))
-        XCTAssertEqual(state.showDetail.currentSimilars, expectedState.showDetail.currentSimilars)
-    }
-    
-    func test_showDetailReducer_setSimilars_withSuccess() {
-        
-        let successLoadable = Loadable<Page<Show>>.success(nil)
-        
-        let expectedState = AppState(topRated: TopRatedState(), showDetail: ShowDetailState(currentDetail: .initial, currentSimilars: successLoadable), images: ImagesState())
-        appReducer(state: &state, action: .showDetail(action: .setSimilars(successLoadable)))
-        XCTAssertEqual(state.showDetail.currentSimilars, expectedState.showDetail.currentSimilars)
-    }
 
 
 

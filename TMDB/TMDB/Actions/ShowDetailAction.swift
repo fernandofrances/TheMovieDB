@@ -8,9 +8,7 @@
 import Foundation
 
 enum ShowDetailAction {
-    case loadDetail(identifier: Int64)
-    case setDetail(Loadable<ShowDetail>)
-    case loadSimilars(identifier: Int64, page: Int)
-    case setSimilars(Loadable<Page<Show>>)
+    case loadShowDetailAndRelated(identifier: Int64, page: Int)
+    case setDetail(Loadable<[ShowDetail]>)
     case removeCurrentDetail
 }

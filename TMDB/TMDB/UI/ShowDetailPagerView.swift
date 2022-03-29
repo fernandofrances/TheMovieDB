@@ -10,6 +10,7 @@ import SwiftUI
 struct ShowDetailPagerView: View {
     
     @EnvironmentObject private var store: AppStore
+    
     let show: Show
     
     @State private var currentPage = 0
@@ -17,39 +18,38 @@ struct ShowDetailPagerView: View {
     var body: some View {
         content.onDisappear {
             store.dispatch(.showDetail(action: .removeCurrentDetail))
-        }
+        }.navigationBarHidden(true)
     }
     
-    // First download similars
-    // put all shows in an array
-    // show the tab and let the detail download the detail show of each show.
-    //!!
-    
     private var content: some View {
-        switch store.state.showDetail.currentSimilars {
+        switch store.state.showDetail.currentDetail {
         case .initial:
             return AnyView(Color.black
-                .onAppear {
-                    store.dispatch(.showDetail(action: .loadSimilars(identifier: show.identifier, page: 1)))
-                })
+                            .onAppear {
+                store.dispatch(.showDetail(action: .loadShowDetailAndRelated(identifier: show.identifier, page: 1)))
+            })
             
         case .progress:
-            return AnyView(ProgressView()
-                .background(Color.black))
-            
-        case .success(let similars):
-            var results = [show]
-            results.append(contentsOf: similars?.results ?? [])
-              return AnyView(
-                TabView {
-                    ForEach(results, id: \.self) { show in
-                        ShowDetailView(show: show)
-                    }
+            return AnyView(
+                ZStack {
+                    Color.black
+                    ProgressView()
                 }
-                    .tabViewStyle(.page(indexDisplayMode: .always))
-                    .ignoresSafeArea()
-              )
-            
+            )
+               
+        case .success(let details):
+            if let details = details {
+                return AnyView(
+                    TabView {
+                        ForEach(details, id: \.self) { show in
+                            ShowDetailView(show: show, configuration: store.state.images.configuration)
+                        }
+                    }
+                        .background(Color.black)
+                        .tabViewStyle(.page(indexDisplayMode: .always))
+                )
+            }
+            return AnyView(EmptyView())
         case .failure(_):
             return AnyView(EmptyView())
             

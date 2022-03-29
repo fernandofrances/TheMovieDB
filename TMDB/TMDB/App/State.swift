@@ -23,11 +23,12 @@ extension AppState {
 
 struct TopRatedState {
     var topRated: Loadable<Page<Show>> = .initial
+    var showSelected: Bool = false
+    var selectedShow: Show? = nil
 }
 
 struct ShowDetailState {
-    var currentDetail: Loadable<ShowDetail> = .initial
-    var currentSimilars: Loadable<Page<Show>> = .initial
+    var currentDetail: Loadable<[ShowDetail]> = .initial
 }
 
 struct ImagesState {

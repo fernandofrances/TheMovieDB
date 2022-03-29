@@ -12,15 +12,13 @@ struct ShowDetailService {
     
     let repository: ShowDetailRepositoryProtocol
     
-    func loadShow(identifier: Int64) -> AnyPublisher<Loadable<ShowDetail>, Error> {
+    func loadShow(identifier: Int64) -> AnyPublisher<ShowDetail, Error> {
         repository.loadShowDetail(identifier: identifier)
-            .map { .success($0) }
             .eraseToAnyPublisher()
     }
     
-    func loadSimilars(identifier: Int64, page: Int) -> AnyPublisher<Loadable<Page<Show>>, Error> {
+    func loadSimilars(identifier: Int64, page: Int) -> AnyPublisher<Page<Show>, Error> {
         repository.loadShowSimilars(identifier: identifier, page: page)
-            .map { .success($0) }
             .eraseToAnyPublisher()
     }
 

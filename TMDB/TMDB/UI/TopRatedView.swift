@@ -11,7 +11,6 @@ struct TopRatedView: View {
     
     @EnvironmentObject private var store: AppStore
     
-    
     var showColumns: [GridItem] {
         [GridItem(.flexible(minimum: 150)),
          GridItem(.flexible(minimum: 150))]
@@ -39,30 +38,39 @@ struct TopRatedView: View {
     
     private func topRatedGrid(shows: [Show])-> some View {
         AnyView(
-            NavigationView {
-                GeometryReader { geometry in
-                    ScrollView {
-                        VStack {
-                            HStack {
-                                Text("Top Rated Shows")
-                                    .font(.largeTitle)
-                                    .bold()
-                                    .padding()
-                                Spacer()
-                            }
-                            LazyVGrid(columns: showColumns) {
-                                ForEach(shows, id: \.self) { show in
-                                    NavigationLink(destination: ShowDetailPagerView(show: show)) {
-                                        ShowCardView(show: show,
-                                                     configuration: store.state.images.configuration,
-                                                     width: geometry.size.width/2 - 20)
+            GeometryReader { geometry in
+                ScrollView(showsIndicators: false) {
+                    VStack {
+                        HStack {
+                            Text("Top Rated Shows")
+                                .foregroundColor(.white)
+                                .font(.largeTitle)
+                                .bold()
+                                .padding()
+                            Spacer()
+                        }
+                        LazyVGrid(columns: showColumns) {
+                            ForEach(shows, id: \.self) { show in
+                                ShowCardView(show: show,
+                                             configuration: store.state.images.configuration,
+                                             width: geometry.size.width/2 - 20)
+                                    .onTapGesture {
+                                        store.dispatch(.topRated(action: .selectShow(show)))
                                     }
-                                }
                             }
                         }
                     }
-                }.navigationBarHidden(true)
+                }
             }
+                .background(Color.black)
+                .sheet(isPresented: $store.state.topRated.showSelected,
+                       onDismiss: {
+                           store.dispatch(.topRated(action: .deselectShow))
+                       }, content: {
+                           if let show = store.state.topRated.selectedShow {
+                               ShowDetailPagerView(show: show)
+                           }
+                       })
         )
     }
     

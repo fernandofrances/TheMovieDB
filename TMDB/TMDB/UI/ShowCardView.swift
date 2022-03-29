@@ -22,7 +22,6 @@ struct ShowCardView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 25.0))
         .frame(width: width, height: height)
-        .northWestShadow()
     }
     
     private var imageLayer: some View {
@@ -56,13 +55,13 @@ struct ShowCardView: View {
                 Spacer()
                 Text(Genre.name(forIdentifier: show.genreIdentifiers?.first ?? 0) ?? "")
                     .font(.system(size: 12))
-                    .foregroundColor(.element)
+                    .foregroundColor(.white)
                     .bold()
                 Text(show.title)
                     .font(.system(size: 20))
                     .bold()
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.element)
+                    .foregroundColor(.white)
             }
             Spacer()
         }.padding()

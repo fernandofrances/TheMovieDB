@@ -15,8 +15,7 @@ struct ShowDetail: Decodable {
     let releaseDate: String
     let episodes: Int64
     let name: String
-    let tagline: String
-    let vote: Double
+    let vote: Double?
     let genres: [Genre]
     
     private enum CodingKeys: String, CodingKey {
@@ -28,7 +27,6 @@ struct ShowDetail: Decodable {
         case episodes = "number_of_episodes"
         case name
         case genres
-        case tagline
         case vote = "vote_average"
     }
 }
@@ -36,5 +34,15 @@ struct ShowDetail: Decodable {
 extension ShowDetail: Mockable {
     static var fileName: String {
         "ShowDetail"
+    }
+}
+
+extension ShowDetail: Hashable, Equatable {
+    static func == (lhs: ShowDetail, rhs: ShowDetail) -> Bool {
+        lhs.identifier == rhs.identifier
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
     }
 }

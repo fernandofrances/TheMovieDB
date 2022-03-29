@@ -19,23 +19,9 @@ struct ShowDetailHeaderView: View {
     
     private func header(show: ShowDetail, size: CGSize) -> some View {
         ZStack {
-            headerBackdropLayer(show: show, size: size)
             headerGradientLayer()
             headerTextLayer(show: show)
-        }.frame(height: size.height/2)
-    }
-    
-    private func headerBackdropLayer(show: ShowDetail, size: CGSize) -> some View {
-        AsyncImage(url: configuration.image(with: show.backdropPath ?? "", size: .w1280))
-        { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: size.width, height: size.height/2)
-                    .clipped()
-            } placeholder: {
-                Color.black
-            }
+        }.frame(height: size.height/2 - 50)
     }
     
     private func headerGradientLayer() -> some View {
@@ -43,7 +29,7 @@ struct ShowDetailHeaderView: View {
                 gradient: Gradient(
                     stops: [.init(color: .black, location: 0),
                             .init(color: .black, location: 0.1),
-                            .init(color: .clear, location: 1)]
+                            .init(color: .clear, location: 0.7)]
                 ),
                 startPoint: .bottomLeading,
                 endPoint: .topLeading
@@ -66,7 +52,7 @@ struct ShowDetailHeaderView: View {
                                 .foregroundColor(.element)
                         }
                         Spacer()
-                        Text(String(show.vote))
+                        Text(String(show.vote ?? 0))
                             .foregroundColor(Color.element)
                             .background(
                                 Circle()

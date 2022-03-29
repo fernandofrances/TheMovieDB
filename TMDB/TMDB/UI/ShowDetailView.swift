@@ -9,72 +9,74 @@ import SwiftUI
 
 struct ShowDetailView: View {
     
-    @EnvironmentObject private var store: AppStore
-    
-    let show: Show
+    let show: ShowDetail
+    let configuration: Configuration
     
     var body: some View {
-        loadableContent
-    }
-    
-    private var loadableContent: some View {
-
-        switch store.state.showDetail.currentDetail {
-        case .initial:
-            return AnyView(
-                Color.black
-                .onAppear {
-                    store.dispatch(.showDetail(action: .loadDetail(identifier: show.identifier)))
-                })
-        case .progress:
-            return AnyView(ProgressView())
-        case .success(let show):
-            if let show = show {
-                return AnyView(showDetailView(show: show))
-            }
-            return AnyView(EmptyView())
-        case .failure(_):
-            return AnyView(EmptyView())
-        }
-    }
-    
-    private func showDetailView(show: ShowDetail)-> some View {
         GeometryReader { geometry in
-            ScrollView {
+            ZStack {
+                background(show: show, size: geometry.size)
+                data(show: show, size: geometry.size)
                 VStack {
-                    ShowDetailHeaderView(show: show,
-                                         configuration: store.state.images.configuration,
-                                         size: geometry.size)
-                    data(show: show)
+                Rectangle()
+                        .frame(width: geometry.size.width, height: 100)
+                        .foregroundColor(.clear)
+                   Spacer()
                 }
             }
         }
         .ignoresSafeArea()
         .background(Color.black)
-        .onDisappear {
-            store.dispatch(.showDetail(action: .removeCurrentDetail))
+    }
+    
+    private func background(show: ShowDetail, size: CGSize) -> some View {
+        VStack {
+            AsyncImage(url: configuration.image(with: show.backdropPath ?? "", size: .w1280)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width, height: size.height/2)
+                        .clipped()
+                        .id(show.identifier)
+                } placeholder: {
+                    Color.black
+                }
+            Spacer()
         }
     }
     
-    private func data(show: ShowDetail) -> some View {
-            VStack {
-                Text(show.overview)
-                    .font(.system(size: 20))
-                    .foregroundColor(Color.element)
-                    .padding()
-                
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(show.episodes) episodes")
-                            .font(.system(size: 18))
+    private func data(show: ShowDetail, size: CGSize) -> some View {
+        VStack {
+            Color.clear.frame(width: size.width, height: 50)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    ShowDetailHeaderView(show: show,
+                                         configuration: configuration,
+                                         size: size)
+                    VStack {
+                        Text(show.overview)
+                            .font(.system(size: 20))
                             .foregroundColor(Color.element)
-                        Text("released on \(show.releaseDate)")
-                            .font(.system(size: 18))
-                            .foregroundColor(Color.element)
+                            .multilineTextAlignment(.leading)
+                            .padding()
+                        
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("\(show.episodes) episodes")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color.element)
+                                Text("released on \(show.releaseDate)")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(Color.element)
+                            }
+                            Spacer()
+                        }.padding(20)
                     }
-                    Spacer()
-                }.padding(20)
+                    .background(Color.black)
+                }
             }
+            .padding(.bottom)
+        }
     }
     
 }
@@ -82,6 +84,6 @@ struct ShowDetailView: View {
 struct ShowDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ShowDetailView(show: Show.mock)
+        ShowDetailView(show: ShowDetail.mock, configuration: Configuration.default)
     }
 }
