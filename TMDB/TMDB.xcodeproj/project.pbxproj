@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6A214A1D27EF82B700451EE1 /* TMDBApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A214A1C27EF82B700451EE1 /* TMDBApp.swift */; };
-		6A214A1F27EF82B700451EE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A214A1E27EF82B700451EE1 /* ContentView.swift */; };
 		6A214A2127EF82BC00451EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A214A2027EF82BC00451EE1 /* Assets.xcassets */; };
 		6A214A2427EF82BC00451EE1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A214A2327EF82BC00451EE1 /* Preview Assets.xcassets */; };
 		6A214A2E27EF82BC00451EE1 /* TMDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A214A2D27EF82BC00451EE1 /* TMDBTests.swift */; };
@@ -130,6 +129,12 @@
 		6AC6A5E127F1C5C5000BE0C1 /* Page.json in Resources */ = {isa = PBXBuildFile; fileRef = 6A214AA927F08C3000451EE1 /* Page.json */; };
 		6AC6A5E627F1CB91000BE0C1 /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5E527F1CB91000BE0C1 /* Mockable.swift */; };
 		6AC6A5E727F1CB91000BE0C1 /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5E527F1CB91000BE0C1 /* Mockable.swift */; };
+		6AC6A5EA27F1D750000BE0C1 /* ShowDetailPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5E927F1D750000BE0C1 /* ShowDetailPagerView.swift */; };
+		6AC6A5EB27F1D750000BE0C1 /* ShowDetailPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5E927F1D750000BE0C1 /* ShowDetailPagerView.swift */; };
+		6AC6A5F627F1EC95000BE0C1 /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5F527F1EC95000BE0C1 /* ShowDetailView.swift */; };
+		6AC6A5F727F1EC95000BE0C1 /* ShowDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5F527F1EC95000BE0C1 /* ShowDetailView.swift */; };
+		6AC6A5F927F1FAAC000BE0C1 /* ShowDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5F827F1FAAC000BE0C1 /* ShowDetailHeaderView.swift */; };
+		6AC6A5FA27F1FAAC000BE0C1 /* ShowDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC6A5F827F1FAAC000BE0C1 /* ShowDetailHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +157,6 @@
 /* Begin PBXFileReference section */
 		6A214A1927EF82B700451EE1 /* TMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A214A1C27EF82B700451EE1 /* TMDBApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBApp.swift; sourceTree = "<group>"; };
-		6A214A1E27EF82B700451EE1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6A214A2027EF82BC00451EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A214A2327EF82BC00451EE1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6A214A2927EF82BC00451EE1 /* TMDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +227,9 @@
 		6A214B2527F0FA2600451EE1 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		6A214B2927F0FD9300451EE1 /* TopRatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedView.swift; sourceTree = "<group>"; };
 		6AC6A5E527F1CB91000BE0C1 /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
+		6AC6A5E927F1D750000BE0C1 /* ShowDetailPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailPagerView.swift; sourceTree = "<group>"; };
+		6AC6A5F527F1EC95000BE0C1 /* ShowDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailView.swift; sourceTree = "<group>"; };
+		6AC6A5F827F1FAAC000BE0C1 /* ShowDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,7 +293,6 @@
 				6A214A4827EF837600451EE1 /* API */,
 				6A214A4727EF836F00451EE1 /* Extensions */,
 				6A214A4627EF833F00451EE1 /* Utilities */,
-				6A214A1E27EF82B700451EE1 /* ContentView.swift */,
 				6A214A2027EF82BC00451EE1 /* Assets.xcassets */,
 				6A214A2227EF82BC00451EE1 /* Preview Content */,
 			);
@@ -375,6 +381,9 @@
 			children = (
 				6A214AF727F0CD8C00451EE1 /* ShowCardView.swift */,
 				6A214B2927F0FD9300451EE1 /* TopRatedView.swift */,
+				6AC6A5E927F1D750000BE0C1 /* ShowDetailPagerView.swift */,
+				6AC6A5F527F1EC95000BE0C1 /* ShowDetailView.swift */,
+				6AC6A5F827F1FAAC000BE0C1 /* ShowDetailHeaderView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -671,17 +680,18 @@
 				6A214A5B27EF83EF00451EE1 /* AppReducer.swift in Sources */,
 				6A214A7227EF8AD400451EE1 /* genres.json in Sources */,
 				6A214A6827EF844B00451EE1 /* Endpoint.swift in Sources */,
+				6AC6A5F927F1FAAC000BE0C1 /* ShowDetailHeaderView.swift in Sources */,
 				6A214AFD27F0D3C200451EE1 /* ImageSize.swift in Sources */,
 				6A214A5227EF83C200451EE1 /* Store.swift in Sources */,
 				6A214B0927F0D56300451EE1 /* ImagesReducer.swift in Sources */,
 				6A214B2627F0FA2600451EE1 /* ColorExtensions.swift in Sources */,
 				6A214ABE27F08E8F00451EE1 /* String+LocalJSONFile.swift in Sources */,
 				6A214A9327F0770E00451EE1 /* ShowDetailRepository.swift in Sources */,
-				6A214A1F27EF82B700451EE1 /* ContentView.swift in Sources */,
 				6A214AF827F0CD8C00451EE1 /* ShowCardView.swift in Sources */,
 				6A214A8427F0739400451EE1 /* TopRatedReducer.swift in Sources */,
 				6A214A1D27EF82B700451EE1 /* TMDBApp.swift in Sources */,
 				6A214A5527EF83CE00451EE1 /* State.swift in Sources */,
+				6AC6A5F627F1EC95000BE0C1 /* ShowDetailView.swift in Sources */,
 				6A214A5D27EF842A00451EE1 /* WebServiceConfiguration.swift in Sources */,
 				6A214A6C27EF8A9C00451EE1 /* Show.swift in Sources */,
 				6A214B2A27F0FD9300451EE1 /* TopRatedView.swift in Sources */,
@@ -693,6 +703,7 @@
 				6A214A8727F0739F00451EE1 /* ShowDetailReducer.swift in Sources */,
 				6A214B1D27F0DD5600451EE1 /* MockImagesRepository.swift in Sources */,
 				6A214A9927F07A6300451EE1 /* ShowDetailMiddleware.swift in Sources */,
+				6AC6A5EA27F1D750000BE0C1 /* ShowDetailPagerView.swift in Sources */,
 				6A214B0527F0D49500451EE1 /* ImagesAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,6 +735,7 @@
 				6A214AB827F08D9400451EE1 /* Show_Tests.swift in Sources */,
 				6A214A9427F0770E00451EE1 /* ShowDetailRepository.swift in Sources */,
 				6A214A8527F0739400451EE1 /* TopRatedReducer.swift in Sources */,
+				6AC6A5FA27F1FAAC000BE0C1 /* ShowDetailHeaderView.swift in Sources */,
 				6A214B0A27F0D56300451EE1 /* ImagesReducer.swift in Sources */,
 				6A214A7027EF8AAE00451EE1 /* Genre.swift in Sources */,
 				6A214A6627EF844000451EE1 /* WebService.swift in Sources */,
@@ -744,6 +756,7 @@
 				6A214A8E27F076FB00451EE1 /* ShowDetailService.swift in Sources */,
 				6A214ADD27F092EB00451EE1 /* State_Tests.swift in Sources */,
 				6A214A5E27EF842C00451EE1 /* WebServiceConfiguration.swift in Sources */,
+				6AC6A5F727F1EC95000BE0C1 /* ShowDetailView.swift in Sources */,
 				6A214AA327F0854800451EE1 /* Endpoint_Tests.swift in Sources */,
 				6A214B2727F0FA2600451EE1 /* ColorExtensions.swift in Sources */,
 				6A214AE827F0BA1D00451EE1 /* MockTopRatedRepository.swift in Sources */,
@@ -763,6 +776,7 @@
 				6A214A7C27EF8E1300451EE1 /* Page.swift in Sources */,
 				6A214B2327F0FA0600451EE1 /* ViewExtensions.swift in Sources */,
 				6AC6A5E727F1CB91000BE0C1 /* Mockable.swift in Sources */,
+				6AC6A5EB27F1D750000BE0C1 /* ShowDetailPagerView.swift in Sources */,
 				6A214B1B27F0DB4C00451EE1 /* ImagesMiddleware_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

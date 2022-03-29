@@ -17,5 +17,9 @@ func showDetailReducer(state: inout ShowDetailState, action: ShowDetailAction) {
         state.currentDetail = loadableDetail
     case .setSimilars(let loadableSimilars):
         state.currentSimilars = loadableSimilars
+    case .removeCurrentDetail:
+        state.currentDetail = .initial
+        state.currentSimilars = .initial
     }
+    
 }

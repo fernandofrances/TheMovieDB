@@ -15,6 +15,8 @@ struct ShowDetail: Decodable {
     let releaseDate: String
     let episodes: Int64
     let name: String
+    let tagline: String
+    let vote: Double
     let genres: [Genre]
     
     private enum CodingKeys: String, CodingKey {
@@ -26,6 +28,8 @@ struct ShowDetail: Decodable {
         case episodes = "number_of_episodes"
         case name
         case genres
+        case tagline
+        case vote = "vote_average"
     }
 }
 

@@ -26,7 +26,7 @@ struct TopRatedView: View {
         case .initial:
             return AnyView(EmptyView())
         case .progress:
-            return AnyView(EmptyView())
+            return AnyView(ProgressView())
         case .success(let topRated):
             if let page = topRated {
                 return AnyView(topRatedGrid(shows: page.results))
@@ -34,27 +34,38 @@ struct TopRatedView: View {
             return AnyView(EmptyView())
         case .failure(_):
             return AnyView(EmptyView())
-            
         }
     }
     
     private func topRatedGrid(shows: [Show])-> some View {
         AnyView(
-            GeometryReader { geometry in
-                ScrollView {
-                    LazyVGrid(columns: showColumns) {
-                        ForEach(shows, id: \.self) { show in
-                            ShowCardView(show: show,
-                                         configuration: store.state.images.configuration,
-                                         width: geometry.size.width/2 - 20)
-                            
+            NavigationView {
+                GeometryReader { geometry in
+                    ScrollView {
+                        VStack {
+                            HStack {
+                                Text("Top Rated Shows")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .padding()
+                                Spacer()
+                            }
+                            LazyVGrid(columns: showColumns) {
+                                ForEach(shows, id: \.self) { show in
+                                    NavigationLink(destination: ShowDetailPagerView(show: show)) {
+                                        ShowCardView(show: show,
+                                                     configuration: store.state.images.configuration,
+                                                     width: geometry.size.width/2 - 20)
+                                    }
+                                }
+                            }
                         }
                     }
-                }
+                }.navigationBarHidden(true)
             }
         )
     }
-
+    
 }
 
 struct TopRatedView_Previews: PreviewProvider {

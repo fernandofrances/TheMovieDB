@@ -61,6 +61,7 @@ struct ShowCardView: View {
                 Text(show.title)
                     .font(.system(size: 20))
                     .bold()
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(.element)
             }
             Spacer()

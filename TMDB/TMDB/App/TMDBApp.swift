@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct TMDBApp: App {
+    
+    let environment = AppEnvironment.bootstrap()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TopRatedView()
+                .environmentObject(environment.store)
+                .onAppear {
+                    environment.store.dispatch(.topRated(action: .loadTopRated(page: 1)))
+                }
         }
     }
 }

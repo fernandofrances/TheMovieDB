@@ -12,4 +12,5 @@ enum ShowDetailAction {
     case setDetail(Loadable<ShowDetail>)
     case loadSimilars(identifier: Int64, page: Int)
     case setSimilars(Loadable<Page<Show>>)
+    case removeCurrentDetail
 }
