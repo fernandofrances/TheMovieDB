@@ -28,7 +28,11 @@ func showDetailMiddleware(service: ShowDetailService) -> Middleware<AppState, Ap
                         .collect()
                 }
                 .map { loadableDetails in
-                    AppAction.showDetail(action: .setDetail(Loadable.success(loadableDetails)))
+                    var loadableDetails = loadableDetails
+                    let selectedIndex = loadableDetails.firstIndex(where: { identifier == $0.identifier })
+                    let selected = loadableDetails.remove(at: selectedIndex ?? 0)
+                    loadableDetails.insert(selected, at: 0)
+                    return AppAction.showDetail(action: .setDetail(Loadable.success(loadableDetails)))
                 }
                 .catch({ error in
                     Just(AppAction.showDetail(action: .setDetail(Loadable.failure(error))))
